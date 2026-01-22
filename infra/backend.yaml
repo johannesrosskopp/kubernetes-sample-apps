@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - image: docker.io/clue/json-server:latest
+        name: json-server
+        resources: {}
+        volumeMounts:
+        - name: json-data
+          mountPath: /data
+      volumes:
+      - name: json-data
+        hostPath:
+          path: "/Users/pd_johannesrosskopp/Documents/VSCodeProjects/kubernetes-sample-apps/json-sever/data"
+          type: DirectoryOrCreate
+status: {}
